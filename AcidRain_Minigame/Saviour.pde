@@ -1,3 +1,9 @@
+// Your cotrolling an Avatar and your goal is to avoid the falling "acid Meteor" as long as you can
+// Try not to get burnt :)
+//And Have Fun
+// Made by Omar Abulibdeh
+// Inspiration from the electron and chain programs from class.
+
 //Variables 
 int playerXCor = 600;  // cordiantes of the players avatar
 int playerYCor = 590;
