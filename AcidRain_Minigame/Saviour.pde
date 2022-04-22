@@ -1,35 +1,29 @@
-// Your cotrolling an Avatar and your goal is to avoid the falling "acid rain" as long as you can
-// Try not to get burnt :)
-//And Have Fun
-// Made by Omar Abulibdeh
-// Inspiration from the electron and chain programs from class.
-
 //Variables 
 int playerXCor = 600;  // cordiantes of the players avatar
 int playerYCor = 590;
 int playerWidth = 55;  // width and height of the players avatar
 int playerHeight = 55;
-int difficulty = 10;  //the higher the diffucluty the more rain drops of acid falls
+int difficulty = 10;  //the higher the diffucluty the more Meteor drops offalling fallings
 int limit = 10;
 float score = 0;
 String message = "Please, Do Try Again If You Had Fun :) ";
-boolean isCollided = false; // detects the collison between the raindrops and the player
+boolean isCollided = false; // detects the collison between the Meteordrops and the player
 boolean lost = true;
-Rain[] Rain;
+Meteor[] Meteor;
 
 
-void acidRain(int xMin, int xMax, int yMin, int yMax, int num){
-  Rain = new Rain[num];
+void fallingMeteor(int xMin, int xMax, int yMin, int yMax, int num){
+  Meteor = new Meteor[num];
  
-  for(int i = 0; i < Rain.length; i++){  // for loops for the rainfall
+  for(int i = 0; i < Meteor.length; i++){  // for loops for the Meteorfalling
      int x = (int)random(xMin, xMax);
      int y = (int)random(yMin, yMax);
-     Rain[i] = new Rain(x, y, 30, 15);
+     Meteor[i] = new Meteor(x, y, 30, 15);
   }
 }
 void setup(){
   size(1280,720);
-  acidRain(-100, width + 20, -250, -80, difficulty);  // spawning in the raindrops
+ fallingMeteor(-100, width + 20, -250, -80, difficulty);  // spawning in the Meteordrops
 
   
 }
@@ -39,9 +33,9 @@ void draw(){
    drawPlayer();
   
   if(!isCollided){      // if the colliosn happens then:
-    moveRain();
+    moveMeteor();
     if(score > limit && score < limit + 1){
-      acidRain(-100, width + 20, -260, -80, difficulty); difficulty += 10; limit += 20;
+     fallingMeteor(-100, width + 20, -260, -80, difficulty); difficulty += 10; limit += 20;
     }
   }
  else{
@@ -53,19 +47,19 @@ void draw(){
   
 }
 
-void moveRain(){
-      for(int i = 0; i < Rain.length; i++){  // where the next group of acid rain will be summoned
-        if(Rain[i].yCor > height){
-           Rain[i].yCor = -10;
+void moveMeteor(){
+      for(int i = 0; i < Meteor.length; i++){  // where the next group offalling Meteor will be summoned
+        if(Meteor[i].yCor > height){
+           Meteor[i].yCor = -10;
         }
-        Rain[i].display();
-        Rain[i].drop(random(1, 20));
+        Meteor[i].display();
+        Meteor[i].drop(random(1, 20));
       
-      // detecting if the colliosn of the player happened with the acid rain
-        boolean conditionXLeft = Rain[i].xCor + Rain[i].w >= playerXCor;
-        boolean conditionXRight = Rain[i].xCor + Rain[i].w <= playerXCor + playerWidth + 4;
-        boolean conditionUp =  Rain[i].yCor >= playerYCor;
-        boolean conditionDown = Rain[i].yCor + Rain[i].h <= playerYCor + playerHeight;
+      // detecting if the colliosn of the player happened with thefalling Meteor
+        boolean conditionXLeft = Meteor[i].xCor + Meteor[i].w >= playerXCor;
+        boolean conditionXRight = Meteor[i].xCor + Meteor[i].w <= playerXCor + playerWidth + 4;
+        boolean conditionUp =  Meteor[i].yCor >= playerYCor;
+        boolean conditionDown = Meteor[i].yCor + Meteor[i].h <= playerYCor + playerHeight;
       
         if(conditionXLeft && conditionXRight && conditionUp && conditionDown){
              isCollided = true;
